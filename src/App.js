@@ -1,8 +1,8 @@
 import './App.css';
 import Header from './Header';
 import Form from './Form.js';
-import Footer from './Footer.js';
 import DisplayWeather from './DisplayWeather';
+import Footer from './Footer.js';
 
 function App() {
   return (
@@ -29,9 +29,11 @@ export default App;
 
 
 // Components:
-  // App.js --> where we take user city selection and make axios call to API, pass props down to DisplayWeather
+  // App.js --> take user city selection from Form.js and make axios call to API, pass props down to DisplayWeather
+  // Header.js
   // Form.js --> get user city selection
   // DisplayWeather.js --> display weather data
+  // Footer.js
 
 
 // Stretch Goals:
