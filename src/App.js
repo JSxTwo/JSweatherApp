@@ -1,9 +1,16 @@
 import './App.css';
+import Header from './Header';
+import Form from './Form.js';
+import Footer from './Footer.js';
+import DisplayWeather from './DisplayWeather';
 
 function App() {
   return (
     <div className="App">
-
+      <Header />
+      <Form />
+      <DisplayWeather />
+      <Footer />
     </div>
   );
 }
@@ -11,21 +18,20 @@ function App() {
 export default App;
 
 
-// Pseudo Code
-
-// 1. User can type in a city in the input field 
-// 2. Once they click 'submit' the weather data will appear on the page
+// Pseudo Code:
+  // 1. User types a city in the input field 
+  // 2. Once they click 'submit' the Current Day forecast, Hourly forecast and 10 Day forecast data will appear on the page
 
 //ENDPOINTS:
   //Current day: https://api.openweathermap.org/data/2.5/weather?q=calgary&appid=3d828a8d5ff245862af24fb2c5883de1&units=metric
-  //4 days: https://pro.openweathermap.org/data/2.5/forecast/hourly?q={city name}&appid={API key}
-  //16 days: api.openweathermap.org/data/2.5/forecast/daily?q={city name}&cnt={cnt}&appid={API key}
+  //4 days Hourly: https://pro.openweathermap.org/data/2.5/forecast/hourly?q={city name}&appid={API key}
+  //Daily 16 days: api.openweathermap.org/data/2.5/forecast/daily?q={city name}&cnt={10}&appid={API key}
 
 
 // Components:
-  // App.js --> display Form
-  // Form.js --> where we make ajax call pass props down to DisplayWeather
-  // DisplayWeather.js --> display data
+  // App.js --> where we take user city selection and make axios call to API, pass props down to DisplayWeather
+  // Form.js --> get user city selection
+  // DisplayWeather.js --> display weather data
 
 
 // Stretch Goals:
