@@ -1,4 +1,5 @@
 import './App.css';
+import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom'
 import Header from './Header';
 import Form from './Form.js';
@@ -7,12 +8,39 @@ import DisplayHourlyWeather from './DisplayHourlyWeather';
 import Display10DaysWeather from './Display10DaysWeather';
 import ErrorPage from './ErrorPage';
 import Footer from './Footer.js';
+import axios from 'axios';
 
 function App() {
+
+  const [ cityChoice, setCityChoice ] = useState("");
+  const [ weatherResult, setWeatherResult ] = useState(null);
+
+  const handleCityChange = (event) => {
+    setCityChoice(event.target.value);
+  }
+
+  const handleSubmit = (event, cityChoice) => {
+    event.preventDefault();
+    
+    axios({
+        url: `https://api.openweathermap.org/data/2.5/weather/`,
+        method: "GET",
+        dataResponse: "json",
+        params: {
+          q: cityChoice,
+          appid: "3d828a8d5ff245862af24fb2c5883de1",
+          units: "metric",
+        }
+    }).then((res) => {
+        setWeatherResult(res.data);
+    });
+    setCityChoice('');
+  }
+
   return (
     <div className="App">
       <Header />
-      <Form />
+      <Form handleCityChange={handleCityChange} handleSubmit={handleSubmit} cityChoice={cityChoice} weatherResult={weatherResult}/>
       {/* <Routes>
         <Route path="/" element= { <> <Header/> <Form/> <DisplayCurrentWeather/> </> }> </Route>
 
@@ -23,7 +51,7 @@ function App() {
         <Route path="/*" element= {<ErrorPage/>} />
       </Routes> */}
       <Routes>
-        <Route path='/' element={<DisplayCurrentWeather />}>
+        <Route path='/' element={<DisplayCurrentWeather weatherResult={weatherResult}/>}>
           <Route path='/hourly' element={<DisplayHourlyWeather />}></Route>
           <Route path='/10days' element={<Display10DaysWeather />}></Route>
         </Route>
