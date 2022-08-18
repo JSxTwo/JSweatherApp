@@ -11,8 +11,9 @@ import Footer from './Footer.js';
 function App() {
   return (
     <div className="App">
-
-      <Routes>
+      <Header />
+      <Form />
+      {/* <Routes>
         <Route path="/" element= { <> <Header/> <Form/> <DisplayCurrentWeather/> </> }> </Route>
 
         <Route path="/hourly" element= { <> <Header/> <Form/> <DisplayCurrentWeather/> <DisplayHourlyWeather/> </> }> </Route>
@@ -20,8 +21,14 @@ function App() {
         <Route path="/10days" element= { <> <Header/> <Form/> <DisplayCurrentWeather/> <Display10DaysWeather/> </> }> </Route>
 
         <Route path="/*" element= {<ErrorPage/>} />
+      </Routes> */}
+      <Routes>
+        <Route path='/' element={<DisplayCurrentWeather />}>
+          <Route path='/hourly' element={<DisplayHourlyWeather />}></Route>
+          <Route path='/10days' element={<Display10DaysWeather />}></Route>
+        </Route>
+        <Route path="/*" element={<ErrorPage/>} />
       </Routes>
-
       <Footer />
     </div>
   );
@@ -35,7 +42,8 @@ export default App;
   // 2. Once they click 'submit' the Current Day forecast will appear. User has the option to click Hourly forecast and 10 Day forecast.
 
 //ENDPOINTS:
-  //Current day: https://api.openweathermap.org/data/2.5/weather?q=calgary&appid=3d828a8d5ff245862af24fb2c5883de1&units=metric
+  //Current day: https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
+  // https://api.openweathermap.org/data/2.5/weather?q=calgary&appid=3d828a8d5ff245862af24fb2c5883de1&units=metric
   //4 days Hourly: https://pro.openweathermap.org/data/2.5/forecast/hourly?q={city name}&appid={API key}
   //Daily 10 days: api.openweathermap.org/data/2.5/forecast/daily?q={city name}&cnt={10}&appid={API key}
 
