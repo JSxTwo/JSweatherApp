@@ -8,6 +8,7 @@ import axios from 'axios';
 
 const Form = (props) => {
 
+   const [anotherWeatherResult, setAnotherWeatherResult] = useState(null);
    // const [ cityChoice, setCityChoice ] = useState("");
    // const [ weatherResult, setWeatherResult ] = useState({});
 
@@ -33,6 +34,38 @@ const Form = (props) => {
    //    setCityChoice('');
    // }
 
+   const handleClick = (event) => {
+      console.log(event.target.value);
+      if (event.target.value == 'Hourly') {
+         axios({
+            url: `https://api.openweathermap.org/data/2.5/weather/`,
+            method: 'GET',
+            dataResponse: 'json',
+            params: {
+               q: 'New York',
+               appid: "3d828a8d5ff245862af24fb2c5883de1",
+               units: 'metric',
+            }
+         }).then((res) => {
+            setAnotherWeatherResult(res.data);
+         });
+      } else if (event.target.value == '10Days') {
+         axios({
+            url: `https://api.openweathermap.org/data/2.5/forecast/`,
+            method: 'GET',
+            dataResponse: 'json',
+            params: {
+               q: "Scarborough",
+               appid: "3d828a8d5ff245862af24fb2c5883de1",
+               cnt: 10,
+               units: 'metric',
+            }
+         }).then((res) => {
+            setAnotherWeatherResult(res.data);
+         });
+      }
+   }
+   console.log(anotherWeatherResult);
    return (
       <section>
          <h2>The forecast calls for...</h2>
@@ -49,8 +82,8 @@ const Form = (props) => {
                />
                <button type="submit">Search</button>
             </form>
-         <Link to="/hourly"><button>Hourly Forecast</button></Link>
-         <Link to ="/10days"><button>10 Day Forecast</button></Link>
+         <Link to="/hourly"><button onClick={handleClick} value='Hourly'>Hourly Forecast</button></Link>
+         <Link to ="/10days"><button onClick={handleClick} value='10Days'>10 Day Forecast</button></Link>
          {/* <DisplayCurrentWeather weatherResult={weatherResult}/> */}
       </section>
    )

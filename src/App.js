@@ -34,13 +34,13 @@ function App() {
     }).then((res) => {
         setWeatherResult(res.data);
     });
-    setCityChoice('');
+    // setCityChoice('');
   }
-
+  console.log(cityChoice);
   return (
     <div className="App">
       <Header />
-      <Form handleCityChange={handleCityChange} handleSubmit={handleSubmit} cityChoice={cityChoice} weatherResult={weatherResult}/>
+      <Form handleCityChange={handleCityChange} handleSubmit={handleSubmit} cityChoice={cityChoice} />
       {/* <Routes>
         <Route path="/" element= { <> <Header/> <Form/> <DisplayCurrentWeather/> </> }> </Route>
 
