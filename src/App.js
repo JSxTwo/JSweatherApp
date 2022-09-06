@@ -48,8 +48,8 @@ function App() {
       <Form handleCityChange={handleCityChange} handleSubmit={handleSubmit} cityChoice={cityChoice} weatherResult={weatherResult} />
       <Routes>
         <Route path='/' element={<DisplayCurrentWeather weatherResult={weatherResult} cityChoice={cityChoice} />}>
-          <Route path='/hourly' element={<DisplayHourlyWeather />}></Route>
-          <Route path='/5days' element={<Display5DaysWeather />}></Route>
+          <Route path='/hourly' element={<DisplayHourlyWeather cityChoice={cityChoice}/>}></Route>
+          <Route path='/5days' element={<Display5DaysWeather cityChoice={cityChoice}/>}></Route>
         </Route>
         <Route path="/*" element={<ErrorPage/>} />
       </Routes>
