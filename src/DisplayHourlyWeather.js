@@ -1,10 +1,29 @@
 // DisplayHourlyWeather component
-import { useLocation } from 'react-router-dom';
+// import { useLocation } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const DisplayHourlyWeather = (props) => {
-   const secondResult = useLocation();
-   const secondWeatherResult = secondResult.state;
-   console.log(secondWeatherResult);
+   const [ secondWeatherResult, setSecondWeatherResult] = useState(null);
+
+   // This will get the Hourly Weather data
+   useEffect ( () => {
+      axios({
+         url: `https://api.openweathermap.org/data/2.5/forecast/`,
+         method: "GET",
+         dataResponse: "json",
+         params: {
+            q: props.cityChoice,
+            appid: "3d828a8d5ff245862af24fb2c5883de1",
+            units: "metric",
+         }
+         }).then((res) => {
+            // console.log(res.data);
+            setSecondWeatherResult(res.data);
+         }).catch((error) => {
+         alert('Sorry there seems to be a problem!');
+      })
+   }, [])
 
    return (
       <section>

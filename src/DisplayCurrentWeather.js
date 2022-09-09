@@ -6,28 +6,28 @@ import { useState } from 'react';
 
 const DisplayCurrentWeather = (props) => {
 
-   const [ secondWeatherResult, setSecondWeatherResult] = useState(null);
-   // console.log(props.weatherResult);
+   // const [ secondWeatherResult, setSecondWeatherResult] = useState(null);
+   // // console.log(props.weatherResult);
 
 
-   // This will get the Hourly and 5 Day Weather data
-   const hourlyButtonClicked = () => {
-      axios({
-         url: `https://api.openweathermap.org/data/2.5/forecast/`,
-         method: "GET",
-         dataResponse: "json",
-         params: {
-            q: props.cityChoice,
-            appid: "3d828a8d5ff245862af24fb2c5883de1",
-            units: "metric",
-         }
-         }).then((res) => {
-            // console.log(res.data);
-            setSecondWeatherResult(res.data);
-         }).catch((error) => {
-         alert('Sorry there seems to be a problem!');
-      })
-   }
+   // // This will get the Hourly and 5 Day Weather data
+   // const hourlyButtonClicked = () => {
+   //    axios({
+   //       url: `https://api.openweathermap.org/data/2.5/forecast/`,
+   //       method: "GET",
+   //       dataResponse: "json",
+   //       params: {
+   //          q: props.cityChoice,
+   //          appid: "3d828a8d5ff245862af24fb2c5883de1",
+   //          units: "metric",
+   //       }
+   //       }).then((res) => {
+   //          // console.log(res.data);
+   //          setSecondWeatherResult(res.data);
+   //       }).catch((error) => {
+   //       alert('Sorry there seems to be a problem!');
+   //    })
+   // }
 
    return (
       <>
@@ -47,8 +47,10 @@ const DisplayCurrentWeather = (props) => {
                   <p>Humidity: {props.weatherResult.main.humidity}%</p>
 
                <h4>Click for more weather information:</h4>
-                  <Link to="/hourly" state={secondWeatherResult}><button onClick={hourlyButtonClicked}>Hourly Forecast</button> </Link>
-                  <Link to ="/5days" state={secondWeatherResult}><button onClick={hourlyButtonClicked}>5 Day Forecast</button></Link>
+                  {/* <Link to="/hourly" state={secondWeatherResult}><button onClick={hourlyButtonClicked}>Hourly Forecast</button> </Link>
+                  <Link to ="/5days" state={secondWeatherResult}><button onClick={hourlyButtonClicked}>5 Day Forecast</button></Link> */}
+                  <Link to="/hourly"><button>Hourly Forecast</button> </Link>
+                  <Link to ="/5days"><button>5 Day Forecast</button></Link>
                </>
                : null
             }
